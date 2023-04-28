@@ -34,6 +34,16 @@ body {
     border: 2px solid blue;
 }
 
+.main-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F6F6F6;
+    border: 2px solid blue;
+}
+
 .title-container {
     max-width: 50%;
     width: 100%;
