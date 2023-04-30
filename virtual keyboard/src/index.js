@@ -31,6 +31,25 @@ titleContainer.append(titleText);
 
 
 
+// контейнер для текста описания
+
+const descriptionContainer = document.createElement('div');
+descriptionContainer.classList.add('description-container');
+mainContainer.append(descriptionContainer); 
+
+// заголовок language
+const languageText = document.createElement('p');
+languageText.classList.add('language-text');
+languageText.textContent = 'Change language: Shift + Alt';
+descriptionContainer.append(languageText);
+
+// заголовок windows
+const windowsText = document.createElement('p');
+windowsText.classList.add('windows-text');
+windowsText.textContent = 'Made for Windows';
+descriptionContainer.append(windowsText);
+
+
 // textarea
 const textArea = document.createElement('textarea');
 textArea.classList.add('textarea-field');
@@ -129,6 +148,9 @@ for (let j=0; j<keys.length; j++){
 // div.append(p);
 // // eslint-disable-next-line quotes
 // // p.innerHTML = `<p>Клавиатура создана в операционной системе Windows<p><p>Для переключения языка комбинации: левые cltr +alt</p>`;
+
+
+// Keyboard was made with OS Windows. Shortcut for change language: Ctrl+Alt. 
 
 document.addEventListener("keydown", (event) => {
     console.log(event);

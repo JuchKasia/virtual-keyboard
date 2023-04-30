@@ -60,6 +60,19 @@ body {
     }
 }
 
+.description-container {
+    display: flex;
+    max-width: 900px;
+    width: 100%;
+    padding: 10px 25px 10px 25px;
+    align-items: center;
+    justify-content: space-between;
+    .language-text,
+    .windows-text {
+        font-size: 20px;
+    }
+}
+
 .textarea-field {
     display: block;
     // max-width: 43.750em;
