@@ -86,7 +86,7 @@ keyboard.append(keyboardRow5);
 
 
 // Создаем кнопки клавиатуры
-const keys = [
+const keysEng = [
   '`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace',
   'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'DEL',
   'Caps Lock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'enter', 
@@ -94,38 +94,86 @@ const keys = [
   'Ctrl', 'Win', 'alt', 'space', 'alt', 'Ctrl', '◄', '▼', '►'
 ];
 
-// Добавляем каждую кнопку в контейнер кнопок
-for (let j=0; j<keys.length; j++){
-  const keyElement = document.createElement('button');
-  keyElement.setAttribute('type', 'button');
-  keyElement.classList.add('key');
-  keyElement.textContent = keys[j];
-  //  console.log(keyElement);
-  if (j < 14) {
-    keyboardRow1.append(keyElement);
-  } else if ( j > 13 && j < 29) {
-    keyboardRow2.append(keyElement);
-  } else if (j > 28 && j< 42 ) {
-    keyboardRow3.append(keyElement);
-  } else if ( j>41 && j < 55) {
-    keyboardRow4.append(keyElement);
-  } else if (j> 54) {
-    keyboardRow5.append(keyElement);
-  }
+const keysRu = [
+  'ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace',
+  'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'DEL',
+  'Caps Lock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'enter', 
+  'shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', 'ю', '.', '▲', 'shift',
+  'Ctrl', 'Win', 'alt', 'space', 'alt', 'Ctrl', '◄', '▼', '►'
+];
 
-  if (keys[j] == 'Tab' || keys[j] == 'DEL' || keys[j] == 'Win' ||keys[j] == 'alt') {
-    keyElement.classList.add('key-medium');
-  }
+// Добавляем каждую кнопку в контейнер кнопок ENGLISH LANGUAGE
+function showKeys(keys) {
+    for (let j=0; j<keys.length; j++){
+    const keyElement = document.createElement('button');
+    keyElement.setAttribute('type', 'button');
+    keyElement.classList.add('key');
+    keyElement.textContent = keys[j];
+    //  console.log(keyElement);
+    if (j < 14) {
+      keyboardRow1.append(keyElement);
+    } else if ( j > 13 && j < 29) {
+      keyboardRow2.append(keyElement);
+    } else if (j > 28 && j< 42 ) {
+      keyboardRow3.append(keyElement);
+    } else if ( j>41 && j < 55) {
+      keyboardRow4.append(keyElement);
+    } else if (j> 54) {
+      keyboardRow5.append(keyElement);
+    }
 
-  if (keys[j] == 'backspace' || keys[j] == 'Caps Lock' || keys[j] == 'enter'
-   ||keys[j] == 'shift' || keys[j] == 'Ctrl') {
-    keyElement.classList.add('key-large');
-  }
+    if (keys[j] == 'Tab' || keys[j] == 'DEL' || keys[j] == 'Win' ||keys[j] == 'alt') {
+      keyElement.classList.add('key-medium');
+    }
 
-  if (keys[j] == 'space') {
-    keyElement.classList.add('key-extra-large');
+    if (keys[j] == 'backspace' || keys[j] == 'Caps Lock' || keys[j] == 'enter'
+    ||keys[j] == 'shift' || keys[j] == 'Ctrl') {
+      keyElement.classList.add('key-large');
+    }
+
+    if (keys[j] == 'space') {
+      keyElement.classList.add('key-extra-large');
+    }
   }
 }
+showKeys(keysEng)
+
+
+// Добавляем каждую кнопку в контейнер кнопок RUSSIAN LANGUAGE
+// function showRuLang() {
+//   for (let j=0; j<keysRu.length; j++){
+//   const keyElement = document.createElement('button');
+//   keyElement.setAttribute('type', 'button');
+//   keyElement.classList.add('key');
+//   keyElement.textContent = keysRu[j];
+//   //  console.log(keyElement);
+//   if (j < 14) {
+//     keyboardRow1.append(keyElement);
+//   } else if ( j > 13 && j < 29) {
+//     keyboardRow2.append(keyElement);
+//   } else if (j > 28 && j< 42 ) {
+//     keyboardRow3.append(keyElement);
+//   } else if ( j>41 && j < 55) {
+//     keyboardRow4.append(keyElement);
+//   } else if (j> 54) {
+//     keyboardRow5.append(keyElement);
+//   }
+
+//   if (keysRu[j] == 'Tab' || keysRu[j] == 'DEL' || keysRu[j] == 'Win' ||keysRu[j] == 'alt') {
+//     keyElement.classList.add('key-medium');
+//   }
+
+//   if (keysRu[j] == 'backspace' || keysRu[j] == 'Caps Lock' || keysRu[j] == 'enter'
+//   || keysRu[j] == 'shift' || keysRu[j] == 'Ctrl') {
+//     keyElement.classList.add('key-large');
+//   }
+
+//   if (keysRu[j] == 'space') {
+//     keyElement.classList.add('key-extra-large');
+//   }
+// }
+// }
+// showRuLang()
 
 // // Добавляем клавиатуру в div с id="keyboard"
 // const keyboardContainer = document.getElementById('keyboard');
