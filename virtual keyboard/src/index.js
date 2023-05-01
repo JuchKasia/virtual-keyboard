@@ -712,40 +712,40 @@ const keys = [
 
 
 // Добавляем каждую кнопку в контейнер кнопок ENGLISH LANGUAGE
-function showKeys(keys) {
-    for (let j=0; j<keys.length; j++){
-    const keyElement = document.createElement('button');
-    keyElement.setAttribute('type', 'button');
-    keyElement.classList.add('key');
-    keyElement.textContent = keys[j];
-    //  console.log(keyElement);
-    if (j < 14) {
-      keyboardRow1.append(keyElement);
-    } else if ( j > 13 && j < 29) {
-      keyboardRow2.append(keyElement);
-    } else if (j > 28 && j< 42 ) {
-      keyboardRow3.append(keyElement);
-    } else if ( j>41 && j < 55) {
-      keyboardRow4.append(keyElement);
-    } else if (j> 54) {
-      keyboardRow5.append(keyElement);
-    }
+// function showKeys(keys) {
+//     for (let j=0; j<keys.length; j++){
+//     const keyElement = document.createElement('button');
+//     keyElement.setAttribute('type', 'button');
+//     keyElement.classList.add('key');
+//     keyElement.textContent = keys[j];
+//     //  console.log(keyElement);
+//     if (j < 14) {
+//       keyboardRow1.append(keyElement);
+//     } else if ( j > 13 && j < 29) {
+//       keyboardRow2.append(keyElement);
+//     } else if (j > 28 && j< 42 ) {
+//       keyboardRow3.append(keyElement);
+//     } else if ( j>41 && j < 55) {
+//       keyboardRow4.append(keyElement);
+//     } else if (j> 54) {
+//       keyboardRow5.append(keyElement);
+//     }
 
-    if (keys[j] == 'Tab' || keys[j] == 'DEL' || keys[j] == 'Win' ||keys[j] == 'alt') {
-      keyElement.classList.add('key-medium');
-    }
+//     if (keys[j] == 'Tab' || keys[j] == 'DEL' || keys[j] == 'Win' ||keys[j] == 'alt') {
+//       keyElement.classList.add('key-medium');
+//     }
 
-    if (keys[j] == 'backspace' || keys[j] == 'Caps Lock' || keys[j] == 'enter'
-    ||keys[j] == 'shift' || keys[j] == 'Ctrl') {
-      keyElement.classList.add('key-large');
-    }
+//     if (keys[j] == 'backspace' || keys[j] == 'Caps Lock' || keys[j] == 'enter'
+//     ||keys[j] == 'shift' || keys[j] == 'Ctrl') {
+//       keyElement.classList.add('key-large');
+//     }
 
-    if (keys[j] == 'space') {
-      keyElement.classList.add('key-extra-large');
-    }
-  }
-}
-showKeys(keysEng)
+//     if (keys[j] == 'space') {
+//       keyElement.classList.add('key-extra-large');
+//     }
+//   }
+// }
+// showKeys(keysEng)
 
 
 // Добавляем каждую кнопку в контейнер кнопок RUSSIAN LANGUAGE
@@ -783,6 +783,54 @@ showKeys(keysEng)
 // }
 // }
 // showRuLang()
+
+
+function showKeys(keys) {
+  for (let j=0; j<keys.length; j++){
+    const keyElement = document.createElement('button');
+    keyElement.setAttribute('type', 'button');
+    keyElement.classList.add('key');
+    //keyElement.textContent = keysEng[j]; рабочий вариант как было в начале
+    // или же 
+    keyElement.textContent = keys[j].key.en;
+    // console.log(keys[j].key.en);//масив масивов
+    // console.log(keyElement);
+    if (j < 14) {
+        keyboardRow1.append(keyElement);
+      } else if ( j > 13 && j < 29) {
+        keyboardRow2.append(keyElement);
+      } else if (j > 28 && j< 42 ) {
+        keyboardRow3.append(keyElement);
+      } else if ( j>41 && j < 55) {
+        keyboardRow4.append(keyElement);
+      } else if (j> 54) {
+        keyboardRow5.append(keyElement);
+      }
+
+    if (keys[j].key.en == 'Tab' || keys[j].key.en == 'Del' || keys[j].key.en == 'Win' ||keys[j].key.en == 'Alt') {
+      keyElement.classList.add('key-medium');
+    }
+
+    if (keys[j].key.ru == 'Tab' || keys[j].key.ru == 'Del' || keys[j].key.ru == 'Win' ||keys[j].key.ru == 'Alt') {
+      keyElement.classList.add('key-medium');
+    }
+
+    if (keys[j].key.en == 'Backspace' || keys[j].key.en == 'CapsLock' || keys[j].key.en == 'Enter'
+    ||keys[j].key.en == 'Shift' || keys[j].key.en == 'Ctrl') {
+      keyElement.classList.add('key-large');
+    }
+
+    if (keys[j].key.ru == 'Backspace' || keys[j].key.ru == 'CapsLock' || keys[j].key.ru == 'Enter'
+    ||keys[j].key.ru == 'Shift' || keys[j].key.ru == 'Ctrl') {
+      keyElement.classList.add('key-large');
+    }
+
+    if (keys[j].key.en == 'Space') {
+      keyElement.classList.add('key-extra-large');
+    }
+  }
+}
+showKeys(keys);
 
 // // Добавляем клавиатуру в div с id="keyboard"
 // const keyboardContainer = document.getElementById('keyboard');
