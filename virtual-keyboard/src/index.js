@@ -849,11 +849,17 @@ let keyButtons = document.querySelectorAll('.key');
           || event.code.code === 'CapsLock' || event.code === 'Enter' || event.code == 'ShiftLeft' 
           || event.code === 'ShiftRight' || event.code === 'ControlLeft' || event.code == 'MetaLef' 
           || event.code === 'AltLeft' || event.code === 'Space' || event.code == 'AltRight' 
-          || event.code === 'ControlRight'
+          || event.code === 'ControlRight' || event.code === 'ArrowUp' || event.code === 'ArrowLeft' 
+          || event.code === 'ArrowDown' || event.code === 'ArrowRight'
         // event.key == keyButtons[i].innerHTML 
         ){
           textArea.value += '';
-          keyButtons[i].style.backgroundColor = '#fff';
+          keyButtons[i].style.backgroundColor = 'rgb(238, 229, 217)';
+          keyButtons[i].style.animation ='all 0.2s';
+          setTimeout(()=>{
+            keyButtons[i].style.backgroundColor = "#fff";
+          },200);
+          // keyButtons[i].style.backgroundColor = '#fff';
   continue;
       }
       textArea.value += event.key;
