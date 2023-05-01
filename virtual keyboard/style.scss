@@ -143,6 +143,23 @@ body {
 }
 
 
+
+.key.key-capslock {
+    display: flex;
+    justify-content: flex-start;
+    text-align: center;
+    .caps-icon {
+        margin-left: 8px;
+        font-size: 40px;
+        color: #3d547a
+    }
+    .caps-icon.caps-active {
+        color: #2d405e;
+        text-shadow: 0px 0px 7px #fff;
+    }
+}
+
+
 .non {
     display: none;
 }

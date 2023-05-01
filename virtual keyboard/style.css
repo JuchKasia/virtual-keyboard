@@ -181,6 +181,27 @@ body {
   width: 100%;
 }
 
+.key.key-capslock {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  text-align: center;
+}
+
+.key.key-capslock .caps-icon {
+  margin-left: 8px;
+  font-size: 40px;
+  color: #3d547a;
+}
+
+.key.key-capslock .caps-icon.caps-active {
+  color: #2d405e;
+  text-shadow: 0px 0px 7px #fff;
+}
+
 .non {
   display: none;
 }

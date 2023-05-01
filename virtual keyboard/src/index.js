@@ -832,34 +832,30 @@ function showKeys(keys) {
 }
 showKeys(keys);
 
-// // Добавляем клавиатуру в div с id="keyboard"
-// const keyboardContainer = document.getElementById('keyboard');
-// keyboardContainer.appendChild(keyboard);
 
-// const body = document.querySelector("body");
-// const div = document.createElement("div");
-// div.classList.add("area");
-// const h = document.createElement("h1");
-// h.textContent = "Виртуальная клавиатура";
-// const txtarea = document.createElement("textarea");
-// const board = document.createElement("div");
-// board.classList.add("board");
-// const p = document.createElement("p");
-
-// body.append(div);
-// div.append(h);
-// div.append(txtarea);
-// div.append(board);
-// div.append(p);
-// // eslint-disable-next-line quotes
-// // p.innerHTML = `<p>Клавиатура создана в операционной системе Windows<p><p>Для переключения языка комбинации: левые cltr +alt</p>`;
+// pressing a key on a physical keyboard highlights the key on the virtual keyboard
+let keyButtons = document.querySelectorAll('.key');
+  // console.log(keyButtons);
+  document.addEventListener('keydown', function(event){
+  // console.log(event.key)
+  for(let i = 0; i < keyButtons.length; i++){
+    // console.log(keyButtons[i].innerHTML);
+    if(event.key == keyButtons[i].innerHTML){
+      keyButtons[i].style.backgroundColor = 'rgb(238, 229, 217)';
+      keyButtons[i].style.animation ='all 0.2s';
+      textArea.value += event.key;
+    }
+    setTimeout(()=>{
+      keyButtons[i].style.backgroundColor = "#fff";
+    },200);
+  }
+});
 
 
-// Keyboard was made with OS Windows. Shortcut for change language: Ctrl+Alt. 
 
 document.addEventListener("keydown", (event) => {
     console.log(event);
-    console.log("event.code", event.code); // this is my solution!!!
+    console.log("event.code", event.code);
     console.log("event.key", event.key);
     console.log(event.getModifierState("Shift", "NumLock")); // true
     // console.log(event.)
