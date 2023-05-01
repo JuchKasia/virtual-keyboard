@@ -843,7 +843,21 @@ let keyButtons = document.querySelectorAll('.key');
     if(event.key == keyButtons[i].innerHTML){
       keyButtons[i].style.backgroundColor = 'rgb(238, 229, 217)';
       keyButtons[i].style.animation ='all 0.2s';
+      if(
+        // event.code === 'Backspace'
+        event.code === 'Backspace' || event.code === 'Tab' || event.code == 'Delete' 
+          || event.code.code === 'CapsLock' || event.code === 'Enter' || event.code == 'ShiftLeft' 
+          || event.code === 'ShiftRight' || event.code === 'ControlLeft' || event.code == 'MetaLef' 
+          || event.code === 'AltLeft' || event.code === 'Space' || event.code == 'AltRight' 
+          || event.code === 'ControlRight'
+        // event.key == keyButtons[i].innerHTML 
+        ){
+          textArea.value += '';
+          keyButtons[i].style.backgroundColor = '#fff';
+  continue;
+      }
       textArea.value += event.key;
+      // console.log(event.code);
     }
     setTimeout(()=>{
       keyButtons[i].style.backgroundColor = "#fff";
