@@ -180,4 +180,8 @@ body {
   max-width: 360px;
   width: 100%;
 }
+
+.non {
+  display: none;
+}
 /*# sourceMappingURL=style.css.map */
