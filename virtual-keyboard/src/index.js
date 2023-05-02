@@ -910,7 +910,7 @@ function language(){
     console.log("forLanguage", forLanguage);
     console.log("pressCapsLock", pressCapsLock);
     if (forLanguage == true) {
-      if (pressCapsLock == true) {
+      if (pressCapsLock == true && (i >14)) {
         keyButtons[i].textContent = keysRuShift[i];
 // здесь у нас два тру, а значит русский и в капслоке
       } else if (pressCapsLock == false) {
@@ -918,7 +918,7 @@ function language(){
         // русский нижний регистр
       }
     } else if (forLanguage == false) {
-      if (pressCapsLock == true) {
+      if (pressCapsLock == true && (i > 14)) {
         keyButtons[i].textContent = keysEngShift[i];
       } else if (pressCapsLock == false) {
         keyButtons[i].textContent = keys[i].key.en;
