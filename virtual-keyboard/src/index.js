@@ -86,21 +86,21 @@ keyboard.append(keyboardRow5);
 
 
 // Создаем кнопки клавиатуры
-// const keysEng = [
-//   '`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace',
-//   'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'DEL',
-//   'Caps Lock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'enter', 
-//   'shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '▲', 'shift',
-//   'Ctrl', 'Win', 'alt', 'space', 'alt', 'Ctrl', '◄', '▼', '►'
-// ];
+const keysEngShift = [
+  '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Backspace',
+  'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '|', 'Del',
+  'CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '\'', 'Enter', 
+  'Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', '▲', 'Shift',
+  'Ctrl', 'Win', 'Alt', 'Space', 'Alt', 'Ctrl', '◄', '▼', '►'
+];
 
-// const keysRu = [
-//   'ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace',
-//   'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'DEL',
-//   'Caps Lock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'enter', 
-//   'shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', 'ю', '.', '▲', 'shift',
-//   'Ctrl', 'Win', 'alt', 'space', 'alt', 'Ctrl', '◄', '▼', '►'
-// ];
+const keysRuShift = [
+  'Ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', '+', 'Backspace',
+  'Tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '|', 'Del',
+  'CapsLock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', 'Enter', 
+  'Shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', ',', '▲', 'Shift',
+  'Ctrl', 'Win', 'Alt', 'Space', 'Alt', 'Ctrl', '◄', '▼', '►'
+];
 
 const keys = [
   {
@@ -876,32 +876,149 @@ document.addEventListener('keydown', function(event){
 });
 
 
-let  forLanguage = true;
+let  forLanguage = false;//global
+let pressCapsLock = false;
 
 document.addEventListener("keydown", (event) => {
     console.log(event);
-    console.log("event.code", event.code);
-    console.log("event.key", event.key);
+    // console.log("event.code", event.code);
+    // console.log("event.key", event.key);
     console.log(event.getModifierState("Shift", "NumLock")); // true
 
    // change language
     if(event.getModifierState("Shift") && event.getModifierState("Alt")) {
       // console.log(" for language");
-    forLanguage = !forLanguage; // change true to false
+      forLanguage = !forLanguage; // change true to false
       // console.log("forLanguage", forLanguage);
-    language(forLanguage);
+      language();
     }
+
+    // press CapsLock
+    if(event.code =="CapsLock") {
+      pressCapsLock = !pressCapsLock; // change true to false
+        console.log("pressCapsLock");
+      // capsLockActive(pressCapsLock);
+      language();
+    }
+    console.log(pressCapsLock +" : "+ forLanguage);
 });
 
 
-  // change language
-function language(forLanguage){
-  for(let i = 0; i< 53;i++){
+function language(){
+  for (let i = 0; i < 53; i++) {
     // console.log(keys[i]);
-    if(forLanguage){
-      keyButtons[i].textContent =keys[i].key.en;
-    } else {
-      keyButtons[i].textContent =keys[i].key.ru;
+    console.log("forLanguage", forLanguage);
+    console.log("pressCapsLock", pressCapsLock);
+    if (forLanguage == true) {
+      if (pressCapsLock == true) {
+        keyButtons[i].textContent = keysRuShift[i];
+// здесь у нас два тру, а значит русский и в капслоке
+      } else if (pressCapsLock == false) {
+        keyButtons[i].textContent = keys[i].key.ru;
+        // русский нижний регистр
+      }
+    } else if (forLanguage == false) {
+      if (pressCapsLock == true) {
+        keyButtons[i].textContent = keysEngShift[i];
+      } else if (pressCapsLock == false) {
+        keyButtons[i].textContent = keys[i].key.en;
+      }
     }
   }
 }
+
+
+
+// if ((keyButtons[i].textContent =keys[i].key.en) &&  (pressCapsLock = false)) {
+//         условие по такому принципу. Так можно?
+//         выше у тебя было норм идея
+//         и еще вопрос. 
+//         keyButtons[i].textContent =keys[i].key.en;
+//         keyButtons[i].textContent = keysEngShift[i];
+//         не тоже самое ли это???
+         
+
+//         и еще вопрос
+//         если я прописала вот это
+//         keyButtons[i].textContent =keys[i].key.en; здесь запись
+//         keyButtons[i].textContent = keysEngShift[i]; а здесь перезапись, смысл от двух
+// то как при следеющем условии мне убрать массив кнопки с капслоком
+// чтобы кнопки обратно стали малыеты каждым нажатием меняешь тру на фолс чем говоришь мне малые или большие
+// а не надо ли в таком случае после того как тру поменялось на фолс опять сделать тру в том же куске кода?
+// нет, ты нажимаешь первый раз и говоришь переключи, теперь он фолс, потом нажимаешь и он тру и меняетсяс обратно
+// ясно
+
+
+// function language(forLanguage, pressCapsLock){
+//   for(let i = 0; i< 53;i++){
+//     // console.log(keys[i]);
+//     if(forLanguage &&  pressCapsLock){
+//       // keyButtons[i].textContent =keys[i].key.en;
+//       keyButtons[i].textContent = keysEngShift[i];
+//     } else if(forLanguage &&  !pressCapsLock) {
+//       keyButtons[i].textContent =keys[i].key.ru;
+//       // keyButtons[i].textContent =keys[i].key.en;
+//       // keyButtons[i].textContent =keys[i].key.ru;
+//     }
+//   }
+// }
+// function language(forLanguage, pressCapsLock){
+//   for(let i = 0; i< 53;i++){
+//     // console.log(keys[i]);
+//     if((forLanguage = true) &&  (pressCapsLock = true)){
+//       // keyButtons[i].textContent =keys[i].key.en;
+//       keyButtons[i].textContent = keysEngShift[i];
+//     } else if ((forLanguage = false) &&  (pressCapsLock = false)) {
+//       keyButtons[i].textContent =keys[i].key.en;
+//       // keyButtons[i].textContent = keysEngShift[i];
+//     } else if ((forLanguage = true) &&  (pressCapsLock = false)) {
+//       keyButtons[i].textContent =keys[i].key.ru;
+//     } else if((forLanguage = false) &&  (pressCapsLock = true)) {
+//       keyButtons[i].textContent = keysRuShift[i];
+
+//     }
+
+
+//       // keyButtons[i].textContent =keys[i].key.ru;
+    
+//   }
+// }
+
+
+
+  // press CapsLock
+// function capsLockActive(pressCapsLock){
+//    console.log(pressCapsLock);
+//    console.log(keys[1])
+//    console.log(keys[16].key.rus);
+//     for(let i = 14; i< 53;i++){
+
+//       // console.log(keys[i]);
+//       if(pressCapsLock){
+//       console.log('zahodit');  
+//       // console.log(keys[16].key.);
+// // keyButtons[i].textContent = keys[i][shift].ru;
+// // keyButtons[16].textContent = keys[i].key.sshift.ru;
+// keyButtons[i].textContent = keysRuShift[i];
+// // keyButtons[16].classList('capsLock-active');
+
+//         // keyButtons[i].textContent =keys[i].shift.en;
+//         // pressCapsLock = !pressCapsLock; 
+        
+//         // 
+//       } else if(!pressCapsLock) {
+//         keyButtons[i].textContent =keys[i].key.ru;
+
+//       }
+//       else if(pressCapsLock && (keyButtons[i].textContent =keys[i].key.en)) {
+//         console.log('daf;lkdj;lkdf');
+//         keyButtons[i].textContent = keysEngShift[i];
+//         // keyButtons[i].textContent =keys[i].key.en;
+//       }
+//     }
+// }
+
+
+
+
+  // press CapsLock
