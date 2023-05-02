@@ -40,7 +40,7 @@ mainContainer.append(descriptionContainer);
 // заголовок language
 const languageText = document.createElement('p');
 languageText.classList.add('language-text');
-languageText.textContent = 'Change language: Shift + Alt';
+languageText.textContent = 'Change language: left Shift + left Alt';
 descriptionContainer.append(languageText);
 
 // заголовок windows
