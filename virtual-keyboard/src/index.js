@@ -876,14 +876,32 @@ document.addEventListener('keydown', function(event){
 });
 
 
-
+let  forLanguage = true;
 
 document.addEventListener("keydown", (event) => {
     console.log(event);
     console.log("event.code", event.code);
     console.log("event.key", event.key);
     console.log(event.getModifierState("Shift", "NumLock")); // true
-    // console.log(event.)
-  });
+
+   // change language
+    if(event.getModifierState("Shift") && event.getModifierState("Alt")) {
+      // console.log(" for language");
+    forLanguage = !forLanguage; // change true to false
+      // console.log("forLanguage", forLanguage);
+    language(forLanguage);
+    }
+});
 
 
+  // change language
+function language(forLanguage){
+  for(let i = 0; i< 53;i++){
+    // console.log(keys[i]);
+    if(forLanguage){
+      keyButtons[i].textContent =keys[i].key.en;
+    } else {
+      keyButtons[i].textContent =keys[i].key.ru;
+    }
+  }
+}
