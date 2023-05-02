@@ -793,6 +793,39 @@ function showKeys(keys) {
     //keyElement.textContent = keysEng[j]; рабочий вариант как было в начале
     // или же 
     keyElement.textContent = keys[j].key.en;
+
+  // change language 
+    let pressShiftLeft = false;
+    let pressShiftRight = false;
+    let pressAltLeft = false;
+    let pressAltRight = false;
+
+    let shiftLeft = keys[42].code;
+    let shiftRight = keys[54].code;
+    let altLeft = keys[57].code;
+    let altRight = keys[59].code;
+    document.addEventListener('keydown', function(event){
+  // if(event.code == shiftLeft || event.code == shiftLeft){
+      if((pressShiftLeft = true) && (pressAltLeft = true)) {
+    //  showKeys(keys)
+          if (keyElement.textContent = keys[j].key.en) {
+            keyElement.textContent = keys[j].key.ru;
+            pressShiftLeft = false;
+            pressAltLeft = false;
+          } 
+          
+        //   else 
+        //   if (keyElement.textContent = keys[j].key.ru) {
+        // keyElement.textContent = keys[j].key.en;
+        //   }
+        //   // keyElement.textContent = keys[j].key.ru;
+        //   pressShiftLeft = false;
+        //   pressAltLeft = false;
+        }
+//   if (keyButtons[i].code === 'ShiftLeft' || keyButtons[i].code === 'ShiftRight')
+    })
+
+
     // console.log(keys[j].key.en);//масив масивов
     // console.log(keyElement);
     if (j < 14) {
@@ -836,7 +869,7 @@ showKeys(keys);
 // pressing a key on a physical keyboard highlights the key on the virtual keyboard
 let keyButtons = document.querySelectorAll('.key');
   // console.log(keyButtons);
-  document.addEventListener('keydown', function(event){
+document.addEventListener('keydown', function(event){
   // console.log(event.key)
   for(let i = 0; i < keyButtons.length; i++){
     // console.log(keyButtons[i].innerHTML);
@@ -868,10 +901,133 @@ let keyButtons = document.querySelectorAll('.key');
     setTimeout(()=>{
       keyButtons[i].style.backgroundColor = "#fff";
     },200);
+
+
+    
   }
 });
 
+// change languages
+  //   const shiftLeft = keys[42].code;
+  //   console.log(keys[59].code);
+  //   // const shiftRight = keyButtons[54].code;
+  //   const altLeft = keys[57].code;
+  //   // const altRight = keyButtons[59].code;
 
+  //   let shiftLeftPress = false;
+  //   // let shiftRightPress = false;
+  //   let altLeftPress = false;
+  //   // let altRightPress = false;
+
+    
+
+  // // shiftRight.addEventListener('keydown', function(event){
+  // //   shiftRightPress = true;
+  // //   changeLanguage()
+  // // })
+
+    
+
+  // // altRight.addEventListener('keydown', function(event){
+  // //   altRightPress = true;
+  // //   changeLanguage()
+  // // })
+
+  // function changeLanguage() {
+  //   shiftLeft.addEventListener('keydown', (e) =>{
+  //     shiftLeftPress = true;
+  //     // changeLanguage()
+  //   })
+  //   altLeft.addEventListener('keydown', function(event){
+  //     altLeftPress = true;
+  //     // changeLanguage()
+  //   })
+  //   if (shiftLeftPress && altLeftPress) {
+  //     // showKeys(keys.key.en);
+  //     showKeys(keys)
+  //     keyElement.textContent = keys[j].key.ru;
+  //     let shiftLeftPress = false;
+  //     let altLeftPress = false;
+  //   }
+  // }
+
+
+
+
+  // press shift
+  // const shiftLeft = keys[29].code;
+
+// const shiftLeft = keys[42].code;
+//     console.log(keys[59].code);
+//     const altLeft = keys[57].code;
+
+//       let shiftLeftPress = false;
+//           let altLeftPress = false;
+//   // let shiftRightPress = false;
+      
+
+//         if (
+//           shiftLeft.addEventListener('keydown', function(event){
+//           shiftLeftPress = true;
+//           // changeLanguage()
+//           }) &&
+
+//           altLeft.addEventListener('keydown', function(event){
+//             altLeftPress = true;
+//             // changeLanguage()
+//           })) {
+//             keyElement.textContent = keys[j].key.en;
+//                  let shiftLeftPress = false;
+//             let altLeftPress = false;
+
+//           }
+
+        
+        
+//         // function changeLanguage() {
+//         //   if (shiftLeftPress && altLeftPress) {
+//         //     showKeys(keys.key.en);
+//         //     let shiftLeftPress = false;
+//         //     let altLeftPress = false;
+      
+//         //   }
+//         // })
+
+
+
+
+// let pressShiftLeft = false;
+// let pressShiftRight = false;
+// let pressAltLeft = false;
+// let pressAltRight = false;
+
+
+// let shiftLeft = keys[42].code;
+// let shiftRight = keys[54].code;
+// let altLeft = keys[57].code;
+// let altRight = keys[59].code;
+// console.log(keys[59].code)
+
+
+// if (keyButtons[i].code === 'ShiftLeft') {
+//   this.value = false;
+// }
+// if (keyButtons[i].code === 'ShiftRight') {
+//   this.value = false;
+// }
+
+// document.addEventListener('keydown', function(event){
+//   // if(event.code == shiftLeft || event.code == shiftLeft){
+//     if((pressShiftLeft = true) && (pressAltLeft = true)) {
+//   //  showKeys(keys)
+//     // keyElement.textContent = keys[j].key.ru;
+    
+//     // if(event.key == keyButtons[i].innerHTML){
+//   }
+  
+// //   if (keyButtons[i].code === 'ShiftLeft' || keyButtons[i].code === 'ShiftRight')
+// })
+      
 
 document.addEventListener("keydown", (event) => {
     console.log(event);
@@ -880,6 +1036,5 @@ document.addEventListener("keydown", (event) => {
     console.log(event.getModifierState("Shift", "NumLock")); // true
     // console.log(event.)
   });
-
 
 
