@@ -53,6 +53,7 @@ descriptionContainer.append(windowsText);
 // textarea
 const textArea = document.createElement('textarea');
 textArea.classList.add('textarea-field');
+textArea.setAttribute('autofocus', true);
 mainContainer.append(textArea); 
 
 
@@ -863,15 +864,37 @@ let keyButtons = document.querySelectorAll('.key');
           },200);
           // keyButtons[i].style.backgroundColor = '#fff';
           continue;
-                }
+        }
         textArea.value += event.key;
+        textArea.blur(); 
       // console.log(event.code);
     }
     setTimeout(()=>{
       keyButtons[i].style.backgroundColor = "#fff";
     },200);
+
+ 
+      
  }
 });
+
+   for (let i=0; i<keyButtons.length; i++) {
+    keyButtons[i].addEventListener('click', function() {
+      
+      if(keyButtons[i].innerHTML=="Backspace"){
+        console.log("back");
+        textArea.value = textArea.value.slice(0, -1);
+    
+        return;
+      }
+    // tab znaczok jest
+    
+      textArea.value +=  keyButtons[i].innerHTML  
+        // keyButtons[i].
+        console.log(keyButtons[i].innerHTML);
+     
+    })
+     }
 
 
 
