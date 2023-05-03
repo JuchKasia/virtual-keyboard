@@ -40,7 +40,7 @@ mainContainer.append(descriptionContainer);
 // заголовок language
 const languageText = document.createElement('p');
 languageText.classList.add('language-text');
-languageText.textContent = 'Change language: Shift + Alt';
+languageText.textContent = 'Change language: left Shift + left Alt';
 descriptionContainer.append(languageText);
 
 // заголовок windows
@@ -53,6 +53,7 @@ descriptionContainer.append(windowsText);
 // textarea
 const textArea = document.createElement('textarea');
 textArea.classList.add('textarea-field');
+textArea.setAttribute('autofocus', true);
 mainContainer.append(textArea); 
 
 
@@ -837,13 +838,14 @@ showKeys(keys);
 // pressing a key on a physical keyboard highlights the key on the virtual keyboard
 let keyButtons = document.querySelectorAll('.key');
   // console.log(keyButtons);
-document.addEventListener('keydown', function(event){
+    document.addEventListener('keydown', function(event){
   // console.log(event.key)
-  for(let i = 0; i < keyButtons.length; i++){
+    for(let i = 0; i < keyButtons.length; i++){
     // console.log(keyButtons[i].innerHTML);
-    if(event.key == keyButtons[i].innerHTML){
-      keyButtons[i].style.backgroundColor = 'rgb(238, 229, 217)';
-      keyButtons[i].style.animation ='all 0.2s';
+      if(event.key == keyButtons[i].innerHTML){
+          keyButtons[i].style.backgroundColor = 'rgb(238, 229, 217)';
+          keyButtons[i].style.animation ='all 0.2s';
+
       if(
         // event.code === 'Backspace'
         event.code === 'Backspace' || event.code === 'Tab' || event.code == 'Delete' 
@@ -861,23 +863,44 @@ document.addEventListener('keydown', function(event){
             keyButtons[i].style.backgroundColor = "#fff";
           },200);
           // keyButtons[i].style.backgroundColor = '#fff';
-  continue;
-      }
-      textArea.value += event.key;
+          continue;
+        }
+        textArea.value += event.key;
+        textArea.blur(); 
       // console.log(event.code);
     }
     setTimeout(()=>{
       keyButtons[i].style.backgroundColor = "#fff";
     },200);
 
-
-    
-  }
+ 
+      
+ }
 });
+
+   for (let i=0; i<keyButtons.length; i++) {
+    keyButtons[i].addEventListener('click', function() {
+      
+      if(keyButtons[i].innerHTML=="Backspace"){
+        console.log("back");
+        textArea.value = textArea.value.slice(0, -1);
+    
+        return;
+      }
+    // tab znaczok jest
+    
+      textArea.value +=  keyButtons[i].innerHTML  
+        // keyButtons[i].
+        console.log(keyButtons[i].innerHTML);
+     
+    })
+     }
+
 
 
 let  forLanguage = false;//global
 let pressCapsLock = false;
+let pressShift = false;
 
 document.addEventListener("keydown", (event) => {
     console.log(event);
@@ -896,21 +919,40 @@ document.addEventListener("keydown", (event) => {
     // press CapsLock
     if(event.code =="CapsLock") {
       pressCapsLock = !pressCapsLock; // change true to false
-        console.log("pressCapsLock");
+      console.log("pressCapsLock");
       // capsLockActive(pressCapsLock);
       language();
     }
     console.log(pressCapsLock +" : "+ forLanguage);
+
+
+// press Shift
+    if(event.code == "ShiftLeft" || event.code == "ShiftRight"){
+      pressShift = !pressShift;
+      pressShiftKey()
+      console.log('fbdgbfd');
+    }
+
 });
+
+
+document.addEventListener("keyup", (event) => {
+  // unpress Shift
+  if(event.code == "ShiftLeft" || event.code == "ShiftRight"){
+    pressShift = !pressShift;
+    console.log('hgff');
+    unPressShiftKey()
+  }
+})
 
 
 function language(){
   for (let i = 0; i < 53; i++) {
     // console.log(keys[i]);
-    console.log("forLanguage", forLanguage);
-    console.log("pressCapsLock", pressCapsLock);
+    //console.log("forLanguage", forLanguage);
+    //console.log("pressCapsLock", pressCapsLock);
     if (forLanguage == true) {
-      if (pressCapsLock == true) {
+      if (pressCapsLock == true && (i >14)) {
         keyButtons[i].textContent = keysRuShift[i];
 // здесь у нас два тру, а значит русский и в капслоке
       } else if (pressCapsLock == false) {
@@ -918,7 +960,7 @@ function language(){
         // русский нижний регистр
       }
     } else if (forLanguage == false) {
-      if (pressCapsLock == true) {
+      if (pressCapsLock == true && (i > 14)) {
         keyButtons[i].textContent = keysEngShift[i];
       } else if (pressCapsLock == false) {
         keyButtons[i].textContent = keys[i].key.en;
@@ -927,98 +969,25 @@ function language(){
   }
 }
 
+// press Shift
+function pressShiftKey() {
+  for (let i =0; i < 53; i++) {
+    if (keyButtons[i].textContent == keys[i].key.en) {
+      keyButtons[i].textContent = keysEngShift[i];
+    } 
+    else if (keyButtons[i].textContent == keys[i].key.ru) {
+      keyButtons[i].textContent = keysRuShift[i];
+    }
+  }
+}
 
-
-// if ((keyButtons[i].textContent =keys[i].key.en) &&  (pressCapsLock = false)) {
-//         условие по такому принципу. Так можно?
-//         выше у тебя было норм идея
-//         и еще вопрос. 
-//         keyButtons[i].textContent =keys[i].key.en;
-//         keyButtons[i].textContent = keysEngShift[i];
-//         не тоже самое ли это???
-         
-
-//         и еще вопрос
-//         если я прописала вот это
-//         keyButtons[i].textContent =keys[i].key.en; здесь запись
-//         keyButtons[i].textContent = keysEngShift[i]; а здесь перезапись, смысл от двух
-// то как при следеющем условии мне убрать массив кнопки с капслоком
-// чтобы кнопки обратно стали малыеты каждым нажатием меняешь тру на фолс чем говоришь мне малые или большие
-// а не надо ли в таком случае после того как тру поменялось на фолс опять сделать тру в том же куске кода?
-// нет, ты нажимаешь первый раз и говоришь переключи, теперь он фолс, потом нажимаешь и он тру и меняетсяс обратно
-// ясно
-
-
-// function language(forLanguage, pressCapsLock){
-//   for(let i = 0; i< 53;i++){
-//     // console.log(keys[i]);
-//     if(forLanguage &&  pressCapsLock){
-//       // keyButtons[i].textContent =keys[i].key.en;
-//       keyButtons[i].textContent = keysEngShift[i];
-//     } else if(forLanguage &&  !pressCapsLock) {
-//       keyButtons[i].textContent =keys[i].key.ru;
-//       // keyButtons[i].textContent =keys[i].key.en;
-//       // keyButtons[i].textContent =keys[i].key.ru;
-//     }
-//   }
-// }
-// function language(forLanguage, pressCapsLock){
-//   for(let i = 0; i< 53;i++){
-//     // console.log(keys[i]);
-//     if((forLanguage = true) &&  (pressCapsLock = true)){
-//       // keyButtons[i].textContent =keys[i].key.en;
-//       keyButtons[i].textContent = keysEngShift[i];
-//     } else if ((forLanguage = false) &&  (pressCapsLock = false)) {
-//       keyButtons[i].textContent =keys[i].key.en;
-//       // keyButtons[i].textContent = keysEngShift[i];
-//     } else if ((forLanguage = true) &&  (pressCapsLock = false)) {
-//       keyButtons[i].textContent =keys[i].key.ru;
-//     } else if((forLanguage = false) &&  (pressCapsLock = true)) {
-//       keyButtons[i].textContent = keysRuShift[i];
-
-//     }
-
-
-//       // keyButtons[i].textContent =keys[i].key.ru;
-    
-//   }
-// }
-
-
-
-  // press CapsLock
-// function capsLockActive(pressCapsLock){
-//    console.log(pressCapsLock);
-//    console.log(keys[1])
-//    console.log(keys[16].key.rus);
-//     for(let i = 14; i< 53;i++){
-
-//       // console.log(keys[i]);
-//       if(pressCapsLock){
-//       console.log('zahodit');  
-//       // console.log(keys[16].key.);
-// // keyButtons[i].textContent = keys[i][shift].ru;
-// // keyButtons[16].textContent = keys[i].key.sshift.ru;
-// keyButtons[i].textContent = keysRuShift[i];
-// // keyButtons[16].classList('capsLock-active');
-
-//         // keyButtons[i].textContent =keys[i].shift.en;
-//         // pressCapsLock = !pressCapsLock; 
-        
-//         // 
-//       } else if(!pressCapsLock) {
-//         keyButtons[i].textContent =keys[i].key.ru;
-
-//       }
-//       else if(pressCapsLock && (keyButtons[i].textContent =keys[i].key.en)) {
-//         console.log('daf;lkdj;lkdf');
-//         keyButtons[i].textContent = keysEngShift[i];
-//         // keyButtons[i].textContent =keys[i].key.en;
-//       }
-//     }
-// }
-
-
-
-
-  // press CapsLock
+// unpress Shift
+function unPressShiftKey() {
+  for (let i =0; i < 53; i++) { 
+    if (keyButtons[i].textContent == keysEngShift[i]) {
+      keyButtons[i].textContent = keys[i].key.en
+    } else if (keyButtons[i].textContent == keysRuShift[i]) {
+      keyButtons[i].textContent = keys[i].key.ru
+    }
+  }
+}
