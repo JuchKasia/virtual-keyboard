@@ -878,17 +878,32 @@ let keyButtons = document.querySelectorAll('.key');
  }
 });
 
-   for (let i=0; i<keyButtons.length; i++) {
+   for (let i = 0; i < keyButtons.length; i++) {
     keyButtons[i].addEventListener('click', function() {
       
-      if(keyButtons[i].innerHTML=="Backspace"){
+
+      // press backspace
+      if(keyButtons[i].innerHTML == "Backspace"){
         console.log("back");
         textArea.value = textArea.value.slice(0, -1);
-    
         return;
       }
-    // tab znaczok jest
-    
+
+      // press enter
+      if(keyButtons[i].innerHTML == "Enter") {
+        textArea.value += '\n';
+        return;
+      }
+
+      // press tab
+      if(keyButtons[i].innerHTML == "Tab"){
+        console.log("back");
+        textArea.value += '\t';
+        return;
+      }
+
+
+
       textArea.value +=  keyButtons[i].innerHTML  
         // keyButtons[i].
         console.log(keyButtons[i].innerHTML);
