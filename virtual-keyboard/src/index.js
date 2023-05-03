@@ -880,12 +880,37 @@ let keyButtons = document.querySelectorAll('.key');
 
    for (let i = 0; i < keyButtons.length; i++) {
     keyButtons[i].addEventListener('click', function() {
-      
 
       // press backspace
       if(keyButtons[i].innerHTML == "Backspace"){
         console.log("back");
         textArea.value = textArea.value.slice(0, -1);
+        return;
+      }
+
+      // press delete
+      if(keyButtons[i].innerHTML == "Del"){
+        console.log("1");
+        // Получение позиции курсора в поле ввода
+        let cursorPosition = textArea.selectionStart;
+        // Получение текста поля ввода
+        let textareaValue = textArea.value;
+        // Получение длины текста поля ввода
+        let textareaLength = textareaValue.length;
+
+        if (cursorPosition < textareaLength) {
+           // Если курсор находится не в конце текста
+           // Удаление символа после курсора
+          let newTextareaValue = textareaValue.slice(0, cursorPosition) + textareaValue.slice(cursorPosition + 1);
+          // let newTextareaValue =textareaValue.slice(cursorPosition + 1);
+          console.log("2");
+            // Обновление текста поля ввода
+          textArea.value = newTextareaValue;
+             // Установка курсора на ту же позицию
+          textArea.selectionStart = cursorPosition;
+          textArea.selectionEnd = cursorPosition;
+
+        } 
         return;
       }
 
@@ -897,12 +922,9 @@ let keyButtons = document.querySelectorAll('.key');
 
       // press tab
       if(keyButtons[i].innerHTML == "Tab"){
-        console.log("back");
         textArea.value += '\t';
         return;
       }
-
-
 
       textArea.value +=  keyButtons[i].innerHTML  
         // keyButtons[i].
