@@ -116,9 +116,13 @@ body {
   line-height: 130%;
   color: #000;
   overflow-wrap: break-word;
+  overflow: scroll;
   scrollbar-width: none;
   background: #fff;
   border-radius: 20px;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
 }
 
 .keyboard {
