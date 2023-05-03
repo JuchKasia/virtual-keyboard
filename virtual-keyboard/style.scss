@@ -89,10 +89,13 @@ body {
     color: #000;
     overflow-wrap: break-word;
     // resize: none; both;
-    // overflow: scroll;
+    overflow: scroll;
     scrollbar-width: none;
     background: #fff;
     border-radius: 20px;
+    
+    hyphens: auto;  // дефисы
+    // scrollbar-width: none;
     // border: solid 1px red;
 }
 

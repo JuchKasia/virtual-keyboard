@@ -873,6 +873,9 @@ let keyButtons = document.querySelectorAll('.key');
       keyButtons[i].style.backgroundColor = "#fff";
     },200);
 
+
+
+
  
       
  }
@@ -932,8 +935,6 @@ let keyButtons = document.querySelectorAll('.key');
      
     })
      }
-
-
 
 let  forLanguage = false;//global
 let pressCapsLock = false;
